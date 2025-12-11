@@ -1,6 +1,6 @@
 
 
-export default function HomePage() {
+export default function SchedulePage() {
   return (
     <section>
       <div className="
@@ -11,7 +11,7 @@ export default function HomePage() {
       w-full 
       text-black
       ">
-        Home Page
+        Schedule Page
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import Sidebar from "@/components/UI/Sidebar/Sidebar";
+import "../styles/globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ntu Calendar",
-  description: "Calendar for NTU students",
+  title: "Teams Schedule Helper",
+  description: "A helpful tool for managing and organizing your Teams schedules efficiently.",
 };
 
 export default function RootLayout({
@@ -27,6 +28,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Sidebar />
         {children}
       </body>
     </html>

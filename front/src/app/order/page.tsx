@@ -1,9 +1,9 @@
 
 
-export default function HomePage() {
+export default function OrderPage() {
   return (
     <section>
-      <div className="
+            <div className="
       flex 
       justify-center 
       items-center 
@@ -11,7 +11,7 @@ export default function HomePage() {
       w-full 
       text-black
       ">
-        Home Page
+        Order Page
       </div>
     </section>
   );
