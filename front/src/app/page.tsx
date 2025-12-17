@@ -1,8 +1,10 @@
+import { SidebarRenderer } from "@/components/SidebarRenderer";
 
 
 export default function HomePage() {
   return (
     <section>
+      <SidebarRenderer page="home" />
       <div className="
       flex 
       justify-center 

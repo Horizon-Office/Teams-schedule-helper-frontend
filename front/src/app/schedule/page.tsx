@@ -1,8 +1,10 @@
+import { SidebarRenderer } from "@/components/SidebarRenderer";
 
 
 export default function SchedulePage() {
   return (
     <section>
+      <SidebarRenderer page="schedule" />
       <div className="
       flex 
       justify-center 

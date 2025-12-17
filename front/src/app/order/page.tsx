@@ -1,9 +1,11 @@
+import { SidebarRenderer } from "@/components/SidebarRenderer";
 
 
 export default function OrderPage() {
   return (
     <section>
-            <div className="
+      <SidebarRenderer page="order" />
+      <div className="
       flex 
       justify-center 
       items-center 
