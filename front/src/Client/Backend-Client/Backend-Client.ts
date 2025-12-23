@@ -24,7 +24,13 @@ export class BackendClient {
         this.scope = scope;
     }
 
-   async getDelegateToken(authCode: string): Promise<AuthDeviceCodeResponse> {
+    /**
+    * To get delegate token
+    * @param authCode - The access token to validate (string)
+    * @returns delegate tokem
+    * @throws Exception if auth code is invalid or expired
+    */
+    async getDelegateToken(authCode: string): Promise<AuthDeviceCodeResponse> {
         const url = `${this.baseURL}/auth/delegateToken`;
 
         const response = await fetch(url, {
@@ -47,11 +53,7 @@ export class BackendClient {
         }
 
         const json = await response.json();
-
-        // Здесь сразу возвращаем распакованные данные из json.data
         const tokenData = json.data;
-
-
         return {
             access_token: tokenData.access_token,
             token_type: tokenData.token_type,
@@ -61,29 +63,34 @@ export class BackendClient {
     }
 
 
-
+    /**
+    * Validates if the access token 
+    * @param token - The access token to validate (string)
+    * @returns True or false
+    * @throws UnauthorizedException if token is invalid or expired
+    */
     async validateToken(token: string): Promise<ValidateTokenResponse> {
-    const url = `${this.baseURL}/auth/validateToken`;
-    try {
+        const url = `${this.baseURL}/auth/validateToken`;
+        try {
 
-        const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ access_token: token }),
-        });
-        if (!response.ok) {
-        return { validate: false };
+            const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ access_token: token }),
+            });
+            if (!response.ok) {
+            return { validate: false };
+            }
+
+            const data = await response.json() as ValidateTokenResponse;
+            return { 
+            validate: data.validate === true 
+            };
+        } catch {
+            return { validate: false };
         }
-
-        const data = await response.json() as ValidateTokenResponse;
-        return { 
-        validate: data.validate === true 
-        };
-    } catch {
-        return { validate: false };
-    }
     }
 }
 

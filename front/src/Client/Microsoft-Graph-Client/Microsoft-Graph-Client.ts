@@ -19,18 +19,23 @@ export class MicrosoftGraphClient {
     }
   }
 
-  async getAuthorizationRedirect(): Promise<AuthorizationRedirectResponse> {
-  const authorizationUrl =
-      `https://login.microsoftonline.com/${this.tenantId}/oauth2/v2.0/authorize` +
-      `?client_id=${encodeURIComponent(this.clientId)}` +
-      `&response_type=code` +
-      `&redirect_uri=${encodeURIComponent(this.redirectUri)}` +
-      `&response_mode=query` +
-      `&scope=${encodeURIComponent(this.scope)}`;
+    /**
+    * To get Microsoft form redirect
+    * @returns redirect url
+    * @throws Exception of some elements missing
+    */
+    async getAuthorizationRedirect(): Promise<AuthorizationRedirectResponse> {
+    const authorizationUrl =
+        `https://login.microsoftonline.com/${this.tenantId}/oauth2/v2.0/authorize` +
+        `?client_id=${encodeURIComponent(this.clientId)}` +
+        `&response_type=code` +
+        `&redirect_uri=${encodeURIComponent(this.redirectUri)}` +
+        `&response_mode=query` +
+        `&scope=${encodeURIComponent(this.scope)}`;
 
-    return {
-      authorization_url: authorizationUrl,
-    };
-  }
+      return {
+        authorization_url: authorizationUrl,
+      };
+    }
 
 }
