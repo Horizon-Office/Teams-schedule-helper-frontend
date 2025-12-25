@@ -1,20 +1,551 @@
-.container{
-    width: 250px;
+
+  .drawer{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 201px;
     height: 100vh;
+    background: #fff;
+    color: #000;
+    border-right: 1px solid #000;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin-left: 0;
-    border-right: 1px solid #000000;
+    z-index: 50;
+  
+    transition: transform 280ms cubic-bezier(.2,.7,.2,1), box-shadow 280ms cubic-bezier(.2,.7,.2,1);
+    will-change: transform;
+    font-family: 'Outfit', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  }
+
+  .drawerOpen{
+    transform: translateX(0);
+    box-shadow: 12px 0 30px rgba(0,0,0,0.12);
+  }
+  .drawerClosed{ transform: translateX(-102%); }
+  
+  .backdrop{
     position: fixed;
-    color: black;
+    inset: 0;
+    background: transparent;
+    z-index: 40;
+    pointer-events: none;
+    transition: background 240ms ease;
+  }
+  .backdropShow{
+    pointer-events: auto;
+  }
+  
+  
+  .topBar{
+    height: 63px;
+    display: flex;
     align-items: center;
+    justify-content: space-between;
+  
+    padding: 0 12px 0 10px;
+    border-bottom: 1px solid #000;
+  }
+  
+  
+.iconBtn{
+  width: 38px;
+  height: 38px;
+  border: 0;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  border-radius: 6px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+  }
+  
+  .homeBtn{
+    
+    margin-left: 2px;
+  }
+  
+  
+  .tabs{
+    height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 10px;
+    border-bottom: 1px solid #000;
+  }
+  
+  .tab{
+    height: 23px;              
+    padding: 0 10px;
+    border-radius: 2px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    color: #000;
+    background: transparent;
+    transition: transform 160ms ease, background 160ms ease, color 160ms ease, box-shadow 160ms ease;
+  }
+  
+  .tabActive{
+    background: #000;
+    color: #fff;
+  }
+  
+  .searchBtn{
+    margin-left: auto;
+    width: 26px;
+    height: 26px;
+    border: 0;
+    background: transparent;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    border-radius: 6px;
+    color: #000;
+    transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+  }
+
+  .searchPanel{
+    position: fixed;
+    top: 60px;
+    left: 201px;
+    width: 260px;
+    max-height: calc(100vh - 140px);
+    padding: 12px;
+    background: #fff;
+    border: 1px solid #000;
+    border-left: 0;
+    border-radius: 0 12px 12px 0;
+    box-shadow: 12px 0 24px rgba(0,0,0,0.08);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-16px) translateY(-2px);
+    transition: opacity 240ms ease, transform 320ms cubic-bezier(.2,.7,.2,1);
+    z-index: 45;
+  }
+
+  .searchPanelOpen{
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0) translateY(0);
+  }
+
+  .searchInputWrap{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 8px 10px;
+    background: #fff;
+  }
+
+  .searchInput{
+    border: 0;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .searchHint{
+    margin-top: 10px;
+    font-size: 12px;
+    color: rgba(0,0,0,0.6);
+  }
+
+  .searchSuggestions{
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 180px;
+    overflow: auto;
+  }
+
+  .suggestionBtn{
+    width: 100%;
+    text-align: left;
+    border: 0;
+    background: rgba(0,0,0,0.04);
+    border-radius: 8px;
+    padding: 8px 10px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: transform 160ms ease, background 160ms ease;
+  }
+
+  .suggestionBtn:hover{
+    background: rgba(0,0,0,0.1);
+    transform: translateY(-1px);
+  }
+  
+  
+  .divider{
+    display: none;
+  }
+  
+  
+  .section{
+    padding: 10px 10px 0 10px;
+  }
+  
+  
+  .sectionHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 1px 8px 1px;
+    width: 100%;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    border-radius: 6px;
+    transition: transform 160ms ease, background 160ms ease;
+  }
+  
+  .sectionTitle{
+    font-size: 16px;   
+    font-weight: 500;
+    line-height: 20px;
+    padding-right: 35%;
+  }
+  
+  
+  .plusBtn{
+    width: 23px;
+    height: 23px;
+    border: 0;
+    background: transparent;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    border-radius: 6px;
+  }
+  
+  
+  .list{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #000; 
+  }
+
+  .facultyWrap{
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 260ms ease;
+  }
+
+  .facultyWrap .list{
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 200ms ease, transform 200ms ease;
+  }
+
+  .facultyWrap.expandOpen .list{
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .itemBtn{
+    width: 100%;
+    height: 24px;      
+    border-radius: 2px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+  
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #000;
+    transition: transform 160ms ease, background 160ms ease, color 160ms ease;
+  }
+  
+  .itemActive{
+    background: #000;
+    color: #fff;
+  }
+  
+  
+  .courseHeader{
+    width: 100%;
+    height: 24px;          
+    border-radius: 2px;
+    border: 0;
+    background: transparent;
+    color: #000;
+    cursor: pointer;
+  
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px 0 10px;
+  
+    margin-top: 10px;
+  
+    font-size: 14px;       
+    font-weight: 500;
+    line-height: 18px;
+    transition: transform 160ms ease, box-shadow 160ms ease;
+  }
+
+  .courseHeaderOpen{
+    background: #000;
+    color: #fff;
+  }
+  
+  .coursePlus{
+    display: inline-flex;
+    transition: transform 220ms ease;
+    transform-origin: center;
+  }
+  .plusRot{ transform: rotate(45deg); }
+  
+  
+  .expandWrap{
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 260ms ease;
+  }
+  .expandOpen{ max-height: 200px; }
+  
+  .bullets{
+    list-style: disc;
+    margin: 8px 0 0 18px;   
+    padding: 0 0 0 8px;
+  }
+  
+  
+  .bullets li{
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 16px;
+    color: #000;
+    margin: 7px 0;
+  }
+
+  .groupItem{
+    border-radius: 6px;
+    padding: 4px 6px;
+    transition: background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+  }
+
+  .groupFlash{
+    border: 1px solid #000;   
+    box-shadow: 0 12px 36px rgba(0,0,0,0.22);
+    animation: groupFlash 980ms cubic-bezier(.2,.7,.2,1);
+    animation-fill-mode: both;
+  }
+
+
+  
+  
+  .courseRow{
+    width: 100%;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  
+    padding: 8px 10px;
+    margin-top: 2px;
+  
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    color: #000;
+    text-align: left;
+    transition: transform 160ms ease, background 160ms ease;
+  }
+  
+  .courseRowActive{
+    background: rgba(0,0,0,0.06);
+    border-radius: 2px;
+  }
+  
+  
+  .bottom{
+    margin-top: auto;
+    padding: 0;
+  }
+  
+  .importBtn{
+    width: 100%;
+    height: 46px;
+    border: solid #000;
+    border-width: 1px 0;
+    background: #fff;
+    cursor: pointer;
+  
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #000;
+    transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+  }
+  
+  
+  .fabOpen{
+    position: fixed;
+    left: 12px;
+    top: 12px;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.35);
+    background: #fff;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    z-index: 60;
+  }
+  
+  .iconBtn img{
+    display: block;
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+  }
+  
+  
+  
+  
+  
+  
+  .edgeToggle{
+    position: fixed;
+    top: 50%;
+    left: 10px;   
+    transform: translateY(-50%);
+  
+    width: 36px;
+    height: 40px;
+  
+    background: #fff;
+    border: 1px solid #000;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  
+    display: grid;
+    place-items: center;
+  
+    cursor: pointer;
+    z-index: 80;
+  
+    transition: box-shadow 220ms ease, left 280ms cubic-bezier(.2,.7,.2,1), transform 220ms ease;
+  }
+
+  .edgeToggleOpen{
+    left: calc(201px + 14px);
+    animation: edgeFloat 2.6s ease-in-out infinite;
+  }
+
+  .edgeToggleClosed{
+    left: auto;
+    right: -60px;
+  }
+  
+  
+  .edgeToggle:hover{
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+
+  .iconBtn:hover,
+  .searchBtn:hover,
+  .tab:hover,
+  .itemBtn:hover,
+  .courseHeader:hover,
+  .courseRow:hover,
+  .importBtn:hover{
+    transform: translateY(-1px);
+  }
+
+  .tab:hover,
+  .itemBtn:hover,
+  .courseRow:hover,
+  .sectionHeader:hover{
+    background: rgba(0,0,0,0.06);
+  }
+
+  .tabActive:hover,
+  .itemActive:hover{
+    background: #000;
+    color: #fff;
+  }
+
+.iconBtnActive{
+  background: #000;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.14);
 }
 
-.menu{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    font-size: 18px;
-    font-weight: 500;
+.iconBtnActive img{
+  filter: invert(1);
 }
+  
+  
+  .edgeToggle:active{
+    transform: translateY(calc(-50% + 1px));
+  }
+  
+  
+  .edgeArrow{
+    display: inline-flex;
+    transition: transform 220ms ease;
+  }
+  
+  
+  .edgeArrowOpen{
+    transform: rotate(180deg);
+  }
+
+  @keyframes edgeFloat{
+    0%{ transform: translateY(-50%); }
+    50%{ transform: translateY(calc(-50% - 4px)); }
+    100%{ transform: translateY(-50%); }
+  }
+
+  @keyframes groupFlash{
+    0%{
+      transform: translateX(-6px);
+      box-shadow: 0 0 0 rgba(0,0,0,0);
+    }
+    45%{
+      transform: translateX(1px);
+      box-shadow: 0 18px 48px rgba(0,0,0,0.26);
+    }
+    75%{
+      transform: translateX(0);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.22);
+    }
+    100%{
+      transform: translateX(0);
+      box-shadow: 0 0 0 rgba(0,0,0,0);
+    }
+  }
+  
+  
+  
+  
+@media (prefers-reduced-motion: reduce) {
+  .drawer, .backdrop, .expandWrap, .facultyWrap, .coursePlus, .edgeToggle, .searchPanel { transition: none !important; }
+  .edgeToggleOpen{ animation: none !important; }
+  .drawerSpotlight{ filter: none !important; }
+}
+  
+
+
