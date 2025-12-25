@@ -1,5 +1,6 @@
 export interface AuthDeviceCodeResponse {
     access_token: string;
+    refresh_token: string;
     token_type: string;
     expires_in: number;
     scope: string;
@@ -10,7 +11,15 @@ export interface ValidateTokenResponse {
     validate: boolean;
 }
 
-export class BackendClient {
+export interface RefreshTokenResponse {
+    access_token: string
+    refresh_token: string;
+    token_type: string;
+    expires_in: number;
+    scope: string;
+}
+
+export class BackendDelegateAuth {
     private baseURL: string;
     private scope: string;
 
@@ -59,6 +68,7 @@ export class BackendClient {
             token_type: tokenData.token_type,
             expires_in: tokenData.expires_in,
             scope: tokenData.scope,
+            refresh_token: tokenData.refresh_token
         };
     }
 
@@ -90,6 +100,48 @@ export class BackendClient {
             };
         } catch {
             return { validate: false };
+        }
+    }
+
+    /**
+    * Refresh if the access token 
+    * @param token - The access token to validate (string)
+    * @returns True or false
+    * @throws UnauthorizedException if token is invalid or expired
+    */
+    async refreshToken(refresh_token: string): Promise<RefreshTokenResponse> {
+        const url = `${this.baseURL}/auth/refreshToken`;
+        try {
+
+            const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+                refresh_token: refresh_token, 
+                scope: this.scope }),
+            });
+            console.log(response.json)
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(
+                    `Failed to refresh delegate token: ${response.status} ${response.statusText}. Details: ${errorText}`
+                );
+            }
+
+            const refreshTokenData = await response.json();
+            return {
+                access_token: refreshTokenData.access_token,
+                refresh_token: refreshTokenData.refresh_token,
+                expires_in: refreshTokenData.expires_in,
+                token_type: refreshTokenData.token_type,
+                scope: refreshTokenData.scope,
+            };
+        } catch (err: unknown) {
+            console.error('BackendClient.refreshToken error:', err);
+            if (err instanceof Error) throw err;
+            throw new Error(String(err));
         }
     }
 }

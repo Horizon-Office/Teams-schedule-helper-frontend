@@ -2,7 +2,7 @@ export interface AuthorizationRedirectResponse {
   authorization_url: string;
 }
 
-export class MicrosoftGraphClient {
+export class MicrosoftGraphDelegateAuth {
   private tenantId: string;
   private clientId: string;
   private scope: string;
