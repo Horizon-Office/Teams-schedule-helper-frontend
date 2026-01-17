@@ -2,7 +2,7 @@ import { OrderSidebar } from "./UI/Sidebars/Order/SidebarOrder";
 import { HomeSidebar } from "./UI/Sidebars/Home/SidebarHome";
 import { ScheduleSidebar } from "./UI/Sidebars/Scheduel/SidebarSchedule";
 
-type SidebarPage = "order" | "home" | "schedule";
+type SidebarPage = "orders" | "home" | "schedule";
 
 type SidebarRendererProps = {
   page: SidebarPage;
@@ -10,7 +10,7 @@ type SidebarRendererProps = {
 
 export function SidebarRenderer({ page }: SidebarRendererProps) {
   switch (page) {
-    case "order":
+    case "orders":
       return <OrderSidebar />;
 
     case "home":

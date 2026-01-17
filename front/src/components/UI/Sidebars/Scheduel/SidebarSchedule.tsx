@@ -6,7 +6,7 @@ export function ScheduleSidebar() {
         <div className={sidebar.container}>
         <nav className={sidebar.menu}>
             <Link href="/">Home</Link>
-            <Link href="/order">Order</Link>
+            <Link href="/orders">Order</Link>
             <Link href="/schedule">Schedule</Link>
         </nav>
         </div>
