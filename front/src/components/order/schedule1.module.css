@@ -1,0 +1,308 @@
+.scheduleContainer {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.scheduleContainer h2 {
+  margin: 0 0 24px 0;
+  color: #333;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.controlsBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.statusSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.statusMessage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #e3f2fd;
+  border-radius: 6px;
+  color: #1976d2;
+  font-size: 14px;
+}
+
+.errorMessage {
+  padding: 8px 12px;
+  background: #ffebee;
+  border-radius: 6px;
+  color: #d32f2f;
+  font-size: 14px;
+}
+
+.lastUpdated {
+  font-size: 12px;
+  color: #666;
+  font-style: italic;
+}
+
+.semesterControls {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.dateInput {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dateInput label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #555;
+}
+
+.dateInput input {
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  min-width: 140px;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btnAdd {
+  background: #4caf50;
+  color: white;
+}
+
+.btnAdd:hover:not(:disabled) {
+  background: #45a049;
+}
+
+.btnPrimary {
+  background: #2196f3;
+  color: white;
+}
+
+.btnPrimary:hover:not(:disabled) {
+  background: #1976d2;
+}
+
+.btnExport {
+  background: #ff9800;
+  color: white;
+}
+
+.btnExport:hover:not(:disabled) {
+  background: #f57c00;
+}
+
+.btnReset {
+  background: #f44336;
+  color: white;
+}
+
+.btnReset:hover:not(:disabled) {
+  background: #d32f2f;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.scheduleTable {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1000px;
+}
+
+.scheduleTable th {
+  background: #f5f5f5;
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  font-weight: 600;
+}
+
+.dayColumn {
+  background: #fff !important;
+  width: 120px;
+}
+
+.groupHeader {
+  background: #000 !important;
+  color: #fff;
+}
+
+.groupSubheader {
+  background: #353535 !important;
+  font-size: 12px;
+  font-weight: normal;
+  color: #fff;
+}
+
+
+
+.periodRow {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.dayPeriodCell {
+  padding: 0 !important;
+  vertical-align: top;
+}
+
+.dayPeriodWrapper {
+  display: flex;
+  height: 100%;
+}
+
+.dayName {
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  padding: 12px 8px;
+  background: #1a1a1a;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.periodsColumn {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.periodItem {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 8px;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 12px;
+  color: #666;
+}
+
+.periodItem:last-child {
+  border-bottom: none;
+}
+
+.scheduleCell {
+  padding: 0 !important;
+  border: 1px solid #e0e0e0;
+  vertical-align: top;
+}
+
+.editableCell {
+  height: 60px;
+  padding: 8px;
+  border: 0.5px solid #00000010;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.editableCell:hover {
+  background-color: #f9f9f9;
+}
+
+.cellContent {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.placeholder {
+  
+  color: #999;
+  font-style: italic;
+}
+
+.cellTextarea {
+  width: 100%;
+  height: 44px;
+  padding: 8px;
+  border: 1px solid #1a1a1a;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  resize: none;
+  outline: none;
+}
+
+.cellTextarea:focus {
+  border-color: #1976d2;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+}
+
+.loadingState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+  gap: 16px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(33, 150, 243, 0.3);
+  border-top: 3px solid #1a1a1a;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.spinnerSmall {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(33, 150, 243, 0.3);
+  border-top: 2px solid #1a1a1a;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
