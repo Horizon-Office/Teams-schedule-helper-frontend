@@ -1,0 +1,619 @@
+/* ===== БАЗОВЫЕ СТИЛИ САЙДБАРА ===== */
+
+.drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 201px;
+    height: 100vh;
+    background: #fff;
+    color: #000;
+    border-right: 1px solid #000;
+    display: flex;
+    flex-direction: column;
+    z-index: 50;
+
+    transition: transform 320ms cubic-bezier(.2, .7, .2, 1), opacity 280ms ease;
+    will-change: transform, opacity;
+    font-family: 'Outfit', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    overflow: hidden;
+}
+
+.drawerExpanded {
+    transform: translateX(0);
+    opacity: 1;
+    box-shadow: 12px 0 30px rgba(0, 0, 0, 0.12);
+}
+
+.drawerCollapsed {
+    transform: translateX(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 45;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 240ms ease;
+}
+
+.backdropShow {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ===== FLOATING WIDGET (плавающая пилюля) ===== */
+
+.floatingWidget {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 60;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+
+    background: #fff;
+    border: 1px solid #000;
+    border-radius: 24px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+    animation: widgetAppear 320ms cubic-bezier(.2, .7, .2, 1);
+}
+
+@keyframes widgetAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.widgetToggle {
+    width: 28px;
+    height: 28px;
+    border: 0;
+    background: transparent;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    border-radius: 6px;
+    color: #000;
+    transition: background 140ms ease, transform 140ms ease;
+}
+
+.widgetToggle:hover {
+    background: rgba(0, 0, 0, 0.08);
+    transform: scale(1.1);
+}
+
+.widgetIcon {
+    width: 28px;
+    height: 28px;
+    border: 0;
+    background: transparent;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #000;
+    transition: background 140ms ease, transform 140ms ease;
+}
+
+.widgetIcon:hover {
+    background: rgba(0, 0, 0, 0.08);
+    transform: scale(1.1);
+}
+
+.widgetIconActive {
+    background: #000;
+    color: #fff;
+}
+
+.widgetIconActive:hover {
+    background: #000;
+}
+
+.widgetIconActive img {
+    filter: invert(1);
+}
+
+/* ===== DROPDOWN PANEL (выпадающая панель) ===== */
+
+.dropdownPanel {
+    position: fixed;
+    top: 68px;
+    left: 16px;
+    width: 280px;
+    max-height: calc(100vh - 100px);
+    z-index: 55;
+
+    background: #fff;
+    border: 1px solid #000;
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    animation: dropdownExpand 280ms cubic-bezier(.2, .7, .2, 1);
+}
+
+@keyframes dropdownExpand {
+    from {
+        opacity: 0;
+        transform: translateY(-12px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.dropdownHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid #000;
+    flex-shrink: 0;
+}
+
+.dropdownTitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+}
+
+.dropdownActions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.dropdownExpand {
+    width: 28px;
+    height: 28px;
+    border: 0;
+    background: transparent;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 140ms ease;
+}
+
+.dropdownExpand:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+.dropdownClose {
+    width: 28px;
+    height: 28px;
+    border: 0;
+    background: transparent;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 140ms ease;
+}
+
+.dropdownClose:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+.dropdownTabs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #000;
+    flex-shrink: 0;
+}
+
+.dropdownContent {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* ===== FLOATING SEARCH PANEL (для свернутого состояния) ===== */
+
+.floatingSearchPanel {
+    position: fixed;
+    top: 16px;
+    left: 185px;
+    /* Сдвинуто левее - начинается раньше */
+    min-width: 240px;
+    max-width: 340px;
+    height: 44px;
+    /* Точно такая же высота как widget */
+    z-index: 59;
+    /* Ниже чем widget (60), чтобы widget был сверху */
+
+    background: #fff;
+    border: 1px solid #000;
+    border-left: 0;
+    /* Сливается с widget */
+    border-radius: 0 24px 24px 0;
+    /* Продолжение пилюли */
+    box-shadow: 4px 0 16px rgba(0, 0, 0, 0.12);
+    padding: 8px 12px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    animation: searchPanelSlide 220ms cubic-bezier(.2, .7, .2, 1);
+}
+
+@keyframes searchPanelSlide {
+    from {
+        opacity: 0;
+        transform: translateX(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Компактные стили для search внутри floating panel */
+.floatingSearchPanel .searchInputWrap {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: #666;
+    /* Темный цвет для иконки */
+}
+
+.floatingSearchPanel .searchInput {
+    font-size: 13px;
+    color: #333;
+    padding-left: 20px;
+    /* Сдвиг текста вправо */
+    /* Темный цвет текста */
+}
+
+.floatingSearchPanel .searchInput::placeholder {
+    color: #666;
+    /* Темный цвет placeholder */
+}
+
+/* Search Results Dropdown */
+.floatingSearchResults {
+    position: absolute;
+    top: 52px;
+    /* Под полем ввода */
+    left: 8px;
+    right: 8px;
+    max-height: 280px;
+    overflow-y: auto;
+
+    background: #fff;
+    border: 1px solid #000;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    z-index: 61;
+
+    animation: resultsSlide 200ms cubic-bezier(.2, .7, .2, 1);
+}
+
+@keyframes resultsSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.floatingSearchHint {
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #666;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.floatingSearchList {
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+}
+
+.floatingSuggestionBtn {
+    width: 100%;
+    text-align: left;
+    border: 0;
+    background: transparent;
+    border-radius: 6px;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: background 140ms ease, transform 120ms ease;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.floatingSuggestionBtn:hover {
+    background: rgba(0, 0, 0, 0.06);
+    transform: translateX(2px);
+}
+
+.suggestionGroup {
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+}
+
+.suggestionMeta {
+    font-size: 11px;
+    color: #666;
+}
+
+.floatingSearchPanel .searchHint,
+.floatingSearchPanel .searchSuggestions {
+    display: none;
+    /* Прячем старые стили */
+}
+
+/* ===== TOP BAR ===== */
+
+.topBar {
+    height: 63px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px 0 10px;
+    border-bottom: 1px solid #000;
+    flex-shrink: 0;
+}
+
+.iconBtn {
+    width: 34px;
+    height: 34px;
+    border: 0;
+    background: transparent;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    border-radius: 6px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.homeBtn {
+    margin-left: 2px;
+}
+
+.iconBtn img {
+    display: block;
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.iconBtnActive {
+    background: #000;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
+}
+
+.iconBtnActive img {
+    filter: invert(1);
+}
+
+.iconBtn:hover {
+    transform: translateY(-1px);
+}
+
+/* ===== TABS ===== */
+
+.tabs {
+    height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 10px;
+    border-bottom: 1px solid #000;
+    flex-shrink: 0;
+}
+
+.tab {
+    height: 23px;
+    padding: 0 10px;
+    border-radius: 2px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    color: #000;
+    background: transparent;
+    transition: transform 160ms ease, background 160ms ease, color 160ms ease, box-shadow 160ms ease;
+}
+
+.tabActive {
+    background: #000;
+    color: #fff;
+}
+
+.tab:hover {
+    background: rgba(0, 0, 0, 0.06);
+    transform: translateY(-1px);
+}
+
+.tabActive:hover {
+    background: #000;
+    color: #fff;
+}
+
+.searchBtn {
+    margin-left: auto;
+    width: 26px;
+    height: 26px;
+    border: 0;
+    background: transparent;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    border-radius: 6px;
+    color: #000;
+    transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.searchBtn:hover {
+    transform: translateY(-1px);
+}
+
+/* ===== EXPANDED SEARCH PANEL (для розгорнутого сайдбару) ===== */
+
+.expandedSearchPanel {
+    position: fixed;
+    top: 63px;
+    /* Під топбаром тільки */
+    left: 201px;
+    /* Від правого краю сайдбару */
+    width: 260px;
+    max-height: calc(100vh - 100px);
+    padding: 12px;
+
+    background: #fff;
+    border: 1px solid #000;
+    border-left: 0;
+    /* Прилягає до сайдбару */
+    border-radius: 0 12px 12px 0;
+    box-shadow: 12px 0 24px rgba(0, 0, 0, 0.08);
+    z-index: 45;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    animation: expandedSearchSlide 280ms cubic-bezier(.2, .7, .2, 1);
+}
+
+@keyframes expandedSearchSlide {
+    from {
+        opacity: 0;
+        transform: translateX(-16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Black text color for expanded search input */
+.expandedSearchPanel .searchInput {
+    color: #000;
+}
+
+.expandedSearchPanel .searchInput::placeholder {
+    color: #666;
+}
+
+.searchInputWrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 8px 10px;
+    background: #fff;
+}
+
+.searchInput {
+    border: 0;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    font-size: 14px;
+}
+
+.searchHint {
+    margin-top: 10px;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.searchSuggestions {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 180px;
+    overflow: auto;
+}
+
+.suggestionBtn {
+    width: 100%;
+    text-align: left;
+    border: 0;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: transform 160ms ease, background 160ms ease;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.suggestionBtn:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Group name and metadata styles (shared with floating search) */
+.suggestionGroup {
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+}
+
+.suggestionMeta {
+    font-size: 11px;
+    color: #666;
+}
+
+/* ===== ACCESSIBILITY ===== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .drawer,
+    .backdrop,
+    .searchPanel,
+    .floatingWidget,
+    .dropdownPanel {
+        animation: none !important;
+        transition: none !important;
+    }
+}
